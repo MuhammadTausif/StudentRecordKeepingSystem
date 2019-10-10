@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/myLayout"
+        android:orientation="vertical"
+        android:stretchColumns="0"
+        android:padding="16dp"
+        android:layout_below="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView android:text="@string/title"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView android:text="@string/roll_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText android:id="@+id/editRollno"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView android:text="@string/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText android:id="@+id/editName"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView android:text="@string/studyProgram"
+                    android:layout_x="30dp"
+                    android:layout_y="150dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText android:id="@+id/editMarks"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView android:text="@string/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText android:id="@+id/editCity"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView android:text="@string/cellNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText android:id="@+id/editCellNo"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button	  android:id="@+id/btnAdd"
+                    android:text="@string/add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button	  android:id="@+id/btnDelete"
+                    android:text="@string/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button   android:id="@+id/btnModify"
+                    android:text="@string/modify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button   android:id="@+id/btnView"
+                    android:text="@string/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button   android:id="@+id/btnViewAll"
+                    android:text="@string/view_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Button   android:id="@+id/btnShowInfo"
+                    android:text="@string/show_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>
