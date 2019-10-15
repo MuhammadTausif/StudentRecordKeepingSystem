@@ -40,11 +40,15 @@ public class CoursesListFragment extends Fragment {
         coursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity().getApplicationContext(), "Item Clicked", Toast.LENGTH_SHORT).show();
-//                Fragment fragment = new AddCourseFragment();
-//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.content_frame, fragment);
-//                ft.commit();
+                Fragment fragment = new UpdateCourseFragment();
+                getActivity().setTitle("Update Course");
+                Course course = (Course) coursesList.getItemAtPosition(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("course", course);
+                fragment.setArguments(bundle);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, fragment);
+                ft.commit();
             }
         });
 

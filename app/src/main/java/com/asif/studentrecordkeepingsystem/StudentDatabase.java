@@ -138,8 +138,26 @@ public class StudentDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public void updateStudent(Student student){
+    public boolean updateStudent(Student student){
+        try{
+            SQLiteDatabase dbl = this.getWritableDatabase();
+            ContentValues studentValues = new ContentValues();
+            studentValues.put("std_roll_no", student.getStd_roll_number());
+            studentValues.put("std_name", student.getStd_name());
+            studentValues.put("std_study_program", student.getStd_Study_Program());
+            studentValues.put("city", student.getCity());
+            studentValues.put("std_cell_no", student.getCell_no());
 
+            long result = dbl.update(TABLE_STUDENT,  studentValues, "std_roll_no="+student.getStd_roll_number()  , null);
+
+            dbl.close();
+            if (result == -1)
+                return false;
+            else
+                return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public void updateCourse(Course course){

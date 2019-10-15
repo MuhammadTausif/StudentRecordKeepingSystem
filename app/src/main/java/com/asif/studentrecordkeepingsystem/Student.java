@@ -1,6 +1,8 @@
 package com.asif.studentrecordkeepingsystem;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     String std_roll_number, std_name, std_Study_Program, city, cell_no;
 
     public Student( ) { }

@@ -1,12 +1,12 @@
 package com.asif.studentrecordkeepingsystem;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,7 +33,7 @@ public class StudentsListFragment extends Fragment {
 
         studentDatabase = new StudentDatabase(getActivity().getApplicationContext());
 
-        View view =  inflater.inflate(R.layout.fragment_students_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_students_list, container, false);
         FloatingActionButton fab = view.findViewById(R.id.fab_add_new_student);
         studentList = (ListView) view.findViewById(R.id.students_list);
         StudentsListAdapter studentsListAdapter = new StudentsListAdapter(getActivity().getApplicationContext(), studentDatabase.extractAllStudents());
@@ -41,10 +41,17 @@ public class StudentsListFragment extends Fragment {
         studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity().getApplicationContext(), "Student List Item Clicked", Toast.LENGTH_SHORT).show();
+                studentList.getItemIdAtPosition(i);
+                Fragment fragment = new UpdateStudentFragment();
+                FragmentTransaction ft = ((MainActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+                Bundle bundle = new Bundle();
+                Student student = (Student) studentList.getItemAtPosition(i);
+                bundle.putSerializable ("student",  student);
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_frame, fragment);
+                ft.commit();
             }
         });
-
 
 
         fab.setOnClickListener(new View.OnClickListener() {

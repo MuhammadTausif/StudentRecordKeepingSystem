@@ -35,4 +35,6 @@
     <string name="enroll_student">Enroll Student</string>
     <string name="list_test">List Test</string>
     <string name="test_list">Test List</string>
+    <string name="update">Update</string>
+    <string name="go_back">Go Back</string>
 </resources>

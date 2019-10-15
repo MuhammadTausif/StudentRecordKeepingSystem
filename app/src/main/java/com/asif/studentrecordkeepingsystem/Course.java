@@ -1,11 +1,13 @@
 package com.asif.studentrecordkeepingsystem;
 
-public class Course {
+import java.io.Serializable;
 
-    String course_Code, course_Name, cridet_Hours;
+ class Course implements Serializable {
 
-    public Course(){}
-    public Course(String course_Code, String course_Name, String cridet_Hours) {
+    private String course_Code, course_Name, cridet_Hours;
+
+    Course(){}
+    Course(String course_Code, String course_Name, String cridet_Hours) {
         this.course_Code = course_Code;
         this.course_Name = course_Name;
         this.cridet_Hours = cridet_Hours;
