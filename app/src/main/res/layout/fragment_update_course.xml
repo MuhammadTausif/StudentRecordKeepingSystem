@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:id="@+id/std_roll_no_update_EditText"/>
+                android:id="@+id/course_code_update_EditText"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:id="@+id/std_name_update_EditText"/>
+                android:id="@+id/course_name_update_EditText"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:id="@+id/std_study_program_update_EditText"/>
+                android:id="@+id/credit_hours_update_EditText"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,21 +56,21 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_go_back_students_list_update_student"
+                    android:id="@+id/btn_go_back_courses_list_update_course"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/go_back" />
 
                 <Button
-                    android:id="@+id/btn_add_student_update_student"
+                    android:id="@+id/btn_update_course_update_course"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/darkGreen"
                     android:text="@string/update" />
                 <Button
-                    android:id="@+id/btn_delete_student_update_student"
+                    android:id="@+id/btn_delete_course_update_course"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

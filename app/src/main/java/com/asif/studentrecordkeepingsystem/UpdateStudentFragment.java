@@ -20,7 +20,7 @@ import android.widget.Toast;
  */
 public class UpdateStudentFragment extends Fragment {
 
-    Button goBack, updateStudent, deleteStudent;
+     Button goBack, updateStudent, deleteStudent;
     EditText rollNo, name, studyProgram, city, cellNo;
 
     public UpdateStudentFragment() {
