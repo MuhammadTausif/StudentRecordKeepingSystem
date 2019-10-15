@@ -59,6 +59,32 @@ public class UpdateCourseFragment extends Fragment {
             }
         });
 
+        deleteCourse = view.findViewById(R.id.btn_delete_course_update_course);
+        deleteCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentDatabase studentDatabase = new StudentDatabase(getActivity().getApplicationContext());
+                try {
+                    if (courseCode.getText().toString().trim().length() == 0
+                    ) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Please fill course code field.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        boolean test = studentDatabase.deleteCourse(new Course(
+                                courseCode.getText().toString(),
+                                courseName.getText().toString(),
+                                creditHours.getText().toString()
+                        ));
+                        if (test) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Course Deleted", Toast.LENGTH_SHORT).show();
+                        }
+                        goBack();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Failed: Exception occurred.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         updateCourse = view.findViewById(R.id.btn_update_course_update_course);
         updateCourse.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -180,11 +180,32 @@ public class StudentDatabase extends SQLiteOpenHelper {
     }
 
     public boolean deleteStudent(Student student){
-        return false;
+        try{
+            SQLiteDatabase dbl = this.getWritableDatabase();
+            long result = dbl.delete(TABLE_STUDENT, "std_roll_no="+student.getStd_roll_number(), null);
+            dbl.close();
+            if (result == -1)
+                return false;
+            else
+                return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
-    public boolean deleteStudent(Course course){ return false;}
-
+    public boolean deleteCourse(Course course){
+        try{
+            SQLiteDatabase dbl = this.getWritableDatabase();
+            long result = dbl.delete(TABLE_COURSE, "course_code="+course.getCourse_Code(), null);
+            dbl.close();
+            if (result == -1)
+                return false;
+            else
+                return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

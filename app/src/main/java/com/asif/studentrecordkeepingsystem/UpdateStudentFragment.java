@@ -2,11 +2,6 @@ package com.asif.studentrecordkeepingsystem;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class UpdateStudentFragment extends Fragment {
 
-     Button goBack, updateStudent, deleteStudent;
+    Button goBack, updateStudent, deleteStudent;
     EditText rollNo, name, studyProgram, city, cellNo;
 
     public UpdateStudentFragment() {
@@ -86,6 +85,34 @@ public class UpdateStudentFragment extends Fragment {
                         ));
                         if (test) {
                             Toast.makeText(getActivity().getApplicationContext(), "Student Updated", Toast.LENGTH_SHORT).show();
+                        }
+                        goBack();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Failed: Exception occurred.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        deleteStudent = view.findViewById(R.id.btn_delete_student_update_student);
+        deleteStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentDatabase studentDatabase = new StudentDatabase(getActivity().getApplicationContext());
+                try {
+                    if (rollNo.getText().toString().trim().length() == 0
+                    ) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Please enter roll Number.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        boolean test = studentDatabase.deleteStudent(new Student(
+                                rollNo.getText().toString(),
+                                name.getText().toString(),
+                                studyProgram.getText().toString(),
+                                city.getText().toString(),
+                                cellNo.getText().toString()
+                        ));
+                        if (test) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Student Deleted", Toast.LENGTH_SHORT).show();
                         }
                         goBack();
                     }
