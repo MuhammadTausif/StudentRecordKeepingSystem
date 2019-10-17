@@ -185,6 +185,9 @@ public class StudentDatabase extends SQLiteOpenHelper {
             SQLiteDatabase db = getWritableDatabase();
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_COURSE + " WHERE course_code != ( " +
                     " SELECT std_course_code FROM " + TABLE_STUDENT_COURSE + " WHERE std_roll_no = " +  studentID + "  )", null);
+            if(cursor.getCount() == 0){
+                cursor = db.rawQuery("SELECT * FROM " + TABLE_COURSE , null);
+            }
             if(cursor.moveToFirst()){
                 do{
                     Course course = new Course();
