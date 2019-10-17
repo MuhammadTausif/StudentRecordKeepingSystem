@@ -138,6 +138,29 @@ public class StudentDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public List<Course> extractEnrolledAllCourses(String studentID){
+        try {
+            ArrayList<Course> coursesList = new ArrayList<Course>();
+            SQLiteDatabase db = getWritableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_COURSE + " WHERE course_code = ( " +
+                    " SELECT std_course_code FROM " + TABLE_STUDENT_COURSE + " WHERE std_roll_no = " +  studentID + "  )", null);
+            if(cursor.moveToFirst()){
+                do{
+                    Course course = new Course();
+                    course.setCourse_Code(cursor.getString(0));
+                    course.setCourse_Name(cursor.getString(1));
+                    course.setCridet_Hours(cursor.getString(2));
+
+                    coursesList.add(course);
+                }while (cursor.moveToNext());
+            }
+            return coursesList;
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+
     public boolean updateStudent(Student student){
         try{
             SQLiteDatabase dbl = this.getWritableDatabase();

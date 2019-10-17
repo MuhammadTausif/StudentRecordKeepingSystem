@@ -2,43 +2,35 @@ package com.asif.studentrecordkeepingsystem;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
-
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    EditText editRollno,editName,editMarks;
-    Button btnAdd,btnDelete,btnModify,btnView,btnViewAll,btnShowInfo;
+    EditText editRollno, editName, editMarks;
+    Button btnAdd, btnDelete, btnModify, btnView, btnViewAll, btnShowInfo;
     SQLiteDatabase db;
     StudentDatabase studentDatabase;
 
@@ -76,15 +68,15 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
 
         // CRUD Operation
-        editRollno=(EditText)findViewById(R.id.editRollno);
-        editName=(EditText)findViewById(R.id.editName);
-        editMarks=(EditText)findViewById(R.id.editMarks);
-        btnAdd=(Button)findViewById(R.id.btnAdd);
-        btnDelete=(Button)findViewById(R.id.btnDelete);
-        btnModify=(Button)findViewById(R.id.btnModify);
-        btnView=(Button)findViewById(R.id.btnView);
-        btnViewAll=(Button)findViewById(R.id.btnViewAll);
-        btnShowInfo=(Button)findViewById(R.id.btnShowInfo);
+        editRollno = (EditText) findViewById(R.id.editRollno);
+        editName = (EditText) findViewById(R.id.editName);
+        editMarks = (EditText) findViewById(R.id.editMarks);
+        btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnModify = (Button) findViewById(R.id.btnModify);
+        btnView = (Button) findViewById(R.id.btnView);
+        btnViewAll = (Button) findViewById(R.id.btnViewAll);
+        btnShowInfo = (Button) findViewById(R.id.btnShowInfo);
 //        btnAdd.setOnClickListener(this);
 //        btnDelete.setOnClickListener(this);
 //        btnModify.setOnClickListener(this);
@@ -92,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 //        btnViewAll.setOnClickListener(this);
 //        btnShowInfo.setOnClickListener(this);
 
-        db=openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase("StudentDB", Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS student(rollno VARCHAR,name VARCHAR,marks VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS Std_Info(Std_roll_number VARCHAR,Std_name VARCHAR, Std_Study_Program VARCHAR, City VARCHAR, Cell_no VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS Std_Course(Course_Code VARCHAR,Course_Name VARCHAR,Cridet_Hours VARCHAR, Std_roll_number VARCHAR);");
@@ -100,119 +92,97 @@ public class MainActivity extends AppCompatActivity
 //        db.execSQL("INSERT INTO Std_Info VALUES('"+editRollno.getText()+"','"+editName.getText()+"','"+editMarks.getText()+"');");
         db.execSQL("INSERT INTO Std_Info VALUES('1','Aslam','BSCS','Sohawa','322');");
         Cursor cursor = db.rawQuery("SELECT * FROM Std_Info", null);
-        if(cursor.moveToFirst()){
-            Toast.makeText(this, "Truth: "+cursor.getString(1), Toast.LENGTH_SHORT).show();
+        if (cursor.moveToFirst()) {
+            Toast.makeText(this, "Truth: " + cursor.getString(1), Toast.LENGTH_SHORT).show();
         }
 
 
     }
 
-    public void onClick(View view)
-    {
-        if(view==btnAdd)
-        {
-            if(editRollno.getText().toString().trim().length()==0||
-                    editName.getText().toString().trim().length()==0||
-                    editMarks.getText().toString().trim().length()==0)
-            {
+    public void onClick(View view) {
+        if (view == btnAdd) {
+            if (editRollno.getText().toString().trim().length() == 0 ||
+                    editName.getText().toString().trim().length() == 0 ||
+                    editMarks.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please enter all values");
                 return;
             }
-            db.execSQL("INSERT INTO student VALUES('"+editRollno.getText()+"','"+editName.getText()+
-                    "','"+editMarks.getText()+"');");
+            db.execSQL("INSERT INTO student VALUES('" + editRollno.getText() + "','" + editName.getText() +
+                    "','" + editMarks.getText() + "');");
             showMessage("Success", "Record added");
             clearText();
         }
-        if(view==btnDelete)
-        {
-            if(editRollno.getText().toString().trim().length()==0)
-            {
+        if (view == btnDelete) {
+            if (editRollno.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please enter Rollno");
                 return;
             }
-            Cursor c=db.rawQuery("SELECT * FROM student WHERE rollno='"+editRollno.getText()+"'", null);
-            if(c.moveToFirst())
-            {
-                db.execSQL("DELETE FROM student WHERE rollno='"+editRollno.getText()+"'");
+            Cursor c = db.rawQuery("SELECT * FROM student WHERE rollno='" + editRollno.getText() + "'", null);
+            if (c.moveToFirst()) {
+                db.execSQL("DELETE FROM student WHERE rollno='" + editRollno.getText() + "'");
                 showMessage("Success", "Record Deleted");
-            }
-            else
-            {
+            } else {
                 showMessage("Error", "Invalid Rollno");
             }
             clearText();
         }
-        if(view==btnModify)
-        {
-            if(editRollno.getText().toString().trim().length()==0)
-            {
+        if (view == btnModify) {
+            if (editRollno.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please enter Rollno");
                 return;
             }
-            Cursor c=db.rawQuery("SELECT * FROM student WHERE rollno='"+editRollno.getText()+"'", null);
-            if(c.moveToFirst())
-            {
-                db.execSQL("UPDATE student SET name='"+editName.getText()+"',marks='"+editMarks.getText()+
-                        "' WHERE rollno='"+editRollno.getText()+"'");
+            Cursor c = db.rawQuery("SELECT * FROM student WHERE rollno='" + editRollno.getText() + "'", null);
+            if (c.moveToFirst()) {
+                db.execSQL("UPDATE student SET name='" + editName.getText() + "',marks='" + editMarks.getText() +
+                        "' WHERE rollno='" + editRollno.getText() + "'");
                 showMessage("Success", "Record Modified");
-            }
-            else
-            {
+            } else {
                 showMessage("Error", "Invalid Rollno");
             }
             clearText();
         }
-        if(view==btnView)
-        {
-            if(editRollno.getText().toString().trim().length()==0)
-            {
+        if (view == btnView) {
+            if (editRollno.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please enter Rollno");
                 return;
             }
-            Cursor c=db.rawQuery("SELECT * FROM student WHERE rollno='"+editRollno.getText()+"'", null);
-            if(c.moveToFirst())
-            {
+            Cursor c = db.rawQuery("SELECT * FROM student WHERE rollno='" + editRollno.getText() + "'", null);
+            if (c.moveToFirst()) {
                 editName.setText(c.getString(1));
                 editMarks.setText(c.getString(2));
-            }
-            else
-            {
+            } else {
                 showMessage("Error", "Invalid Rollno");
                 clearText();
             }
         }
-        if(view==btnViewAll)
-        {
-            Cursor c=db.rawQuery("SELECT * FROM student", null);
-            if(c.getCount()==0)
-            {
+        if (view == btnViewAll) {
+            Cursor c = db.rawQuery("SELECT * FROM student", null);
+            if (c.getCount() == 0) {
                 showMessage("Error", "No records found");
                 return;
             }
-            StringBuffer buffer=new StringBuffer();
-            while(c.moveToNext())
-            {
-                buffer.append("Rollno: "+c.getString(0)+"\n");
-                buffer.append("Name: "+c.getString(1)+"\n");
-                buffer.append("Marks: "+c.getString(2)+"\n\n");
+            StringBuffer buffer = new StringBuffer();
+            while (c.moveToNext()) {
+                buffer.append("Rollno: " + c.getString(0) + "\n");
+                buffer.append("Name: " + c.getString(1) + "\n");
+                buffer.append("Marks: " + c.getString(2) + "\n\n");
             }
             showMessage("Student Details", buffer.toString());
         }
-        if(view==btnShowInfo)
-        {
+        if (view == btnShowInfo) {
             showMessage("Student Management Application", "Developed By Azim");
         }
     }
-    public void showMessage(String title,String message)
-    {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+
+    public void showMessage(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
     }
-    public void clearText()
-    {
+
+    public void clearText() {
         editRollno.setText("");
         editName.setText("");
         editMarks.setText("");
@@ -246,8 +216,8 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             studentDatabase = new StudentDatabase(this);
-            boolean test = studentDatabase.insertStudent( new Student("1", "Muhammad Aslam", "BSCS", "Sohawa", "03225252454"));
-            if (test){
+            boolean test = studentDatabase.insertStudent(new Student("1", "Muhammad Aslam", "BSCS", "Sohawa", "03225252454"));
+            if (test) {
                 Toast.makeText(this, "Student Inserted", Toast.LENGTH_LONG).show();
             }
 
@@ -275,13 +245,17 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
-        } else if(id == R.id.nav_list_test){
+        } else if (id == R.id.nav_enroll_student) {
+            Fragment fragment = new StudentsListForEnrollmentFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        } else if (id == R.id.nav_list_test) {
             Fragment fragment = new ListTestFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
-        }
-        else {
+        } else {
             displaySelectedScreen(id);
         }
 
