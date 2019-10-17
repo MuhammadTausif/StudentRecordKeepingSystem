@@ -29,7 +29,10 @@
                 android:id="@+id/course_credit_hours_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <Button
+            <TextView
+                android:gravity="center"
+                android:background="#f0f0f0"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#0000ff"

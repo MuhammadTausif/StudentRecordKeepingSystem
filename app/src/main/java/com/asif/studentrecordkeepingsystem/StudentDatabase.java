@@ -94,6 +94,25 @@ public class StudentDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public boolean deleteStudentCourse(Student student, Course course){
+        try{
+            SQLiteDatabase dbl = this.getWritableDatabase();
+            ContentValues studentValues = new ContentValues();
+            studentValues.put("std_roll_no", student.getStd_roll_number());
+            studentValues.put("std_course_code", course.getCourse_Code());
+
+            long result = dbl.insert(TABLE_STUDENT_COURSE, null, studentValues);
+
+            dbl.close();
+            if (result == -1)
+                return false;
+            else
+                return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public ArrayList<Student> extractAllStudents(){
         try {
             ArrayList<Student> studentList = new ArrayList<Student>();
