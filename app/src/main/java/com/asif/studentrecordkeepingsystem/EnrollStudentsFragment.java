@@ -50,7 +50,7 @@ public class EnrollStudentsFragment extends Fragment {
         selectedStudentText.setText(student.getStd_name() + " ( Roll No: " + student.getStd_roll_number() + " )");
 
         CoursesEnrollListAdapter coursesListAdapter = new CoursesEnrollListAdapter(getActivity().getApplicationContext(), studentDatabase.extractEnrolledAllCourses( student.getStd_roll_number()));
-        CoursesUnenrollListAdapter ucoursesListAdapter = new CoursesUnenrollListAdapter(getActivity().getApplicationContext(), studentDatabase.extractEnrolledAllCourses( student.getStd_roll_number()));
+        CoursesUnenrollListAdapter ucoursesListAdapter = new CoursesUnenrollListAdapter(getActivity().getApplicationContext(), studentDatabase.extractUnenrolledAllCourses( student.getStd_roll_number()));
         coursesList.setAdapter(coursesListAdapter);
         coursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
