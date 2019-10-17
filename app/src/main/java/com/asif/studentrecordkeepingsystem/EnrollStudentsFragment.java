@@ -64,7 +64,7 @@ public class EnrollStudentsFragment extends Fragment {
         unenrolledCoursesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Course course = (Course) coursesList.getItemAtPosition(position);
+                Course course = (Course) unenrolledCoursesList.getItemAtPosition(position);
                 if(studentDatabase.insertStudentCourse(student, course))
                     Toast.makeText(getActivity().getApplicationContext(), "Inserted \nStudent: " + student.getStd_name() + ", Course: " + course.getCourse_Code(), Toast.LENGTH_SHORT).show();
             }
